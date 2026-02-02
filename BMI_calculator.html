@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMI Calculator</title>
+</head>
+<style type="text/css" media="all">
+  body{
+    height: 100vh;
+    background-color: #212121;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #box1{
+    color: ;
+    text-align: center;
+    
+    
+  }
+  #box2{
+  }
+  #mainBox{
+    background-color: papayawhip;
+    color: black;
+    box-shadow: 0 0px 90px white;
+    border-radius: 16px;
+    padding: 10px;
+  }
+  #submit{
+    width : 100%;
+  }
+  #calculateBox{
+    align-items: center;
+   margin: 10px;
+  }
+  #result{
+    margin: 12px;
+    
+    
+  }
+</style>
+
+<body>
+  <div id="mainBox">
+    <div id="box1">
+      <h1>BMI Calculator</h1>
+    </div>
+    <div id="box2">
+      <form>
+      <p><label >Height in cm : </label><input type="text" name="enter" id="heightIP" value=""/></p>
+      <p><label >Weight in Kg : </label><input type="text" name="enter" id="weightIP" value=""/></p> 
+        <div id = "calculateBox">
+        <button id= "calculate">Calculate</button>
+        <div id="result"></div>
+        </div>
+    </form>
+
+    </div>
+    <div id="box4">
+     <h3>BMI Weight Guide</h3>
+       <p>Under Weight</p>
+       <p>Normal Range = 18.6 and 24.9</p>
+       <p>Overweight = Greater than 24.9</p>
+    </div>
+    
+  </div>
+  
+</body>
+<script type="text/javascript" charset="utf-8">
+  
+  const form = document.querySelector('form')
+  // const height = parseInt(document.querySelector('#heightIP').value)   //starting null value is stored which is useless
+
+  
+form.addEventListener('submit',function(e){
+  // console.log(e)
+  e.preventDefault()
+  const height = parseInt(document.querySelector('#heightIP').value)
+  console.log(height) //88
+  const weight = parseInt(document.querySelector('#weightIP').value)
+  const result = document.querySelector('#result')
+  console.log(weight) //88
+    if(weight == '' || weight<0 || isNaN(weight)){
+      result.innerHTML = "Please give a valid weight"
+    }
+    else if(height == '' || height<0 || isNaN(height)){
+      result.innerHTML = "Please give a valid height"
+    }
+    else {
+     const bmi =  (weight/((height*height)/10000)).toFixed(2)
+    //show result
+    result.innerHTML = `<span>${bmi}</span>`
+      
+    }
+  
+})
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</script>
+</html>

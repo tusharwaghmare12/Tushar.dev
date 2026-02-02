@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <style>
+      body {
+        background-color: #121212;
+        color: white;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #timer {
+        width: 50vb;
+        height: 70vh;
+        text-align: center;
+        border: 2px solid greenyellow;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 17px white;
+      }
+      H1 {
+        font-family:
+          "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      }
+      input {
+        width: 35%;
+        height: 5%;
+        padding: 5px;
+        text-align: center;
+      }
+      #display {
+        font-size: 60px;
+        margin: 75px;
+      }
+      button {
+        
+        width: 35%;
+        padding: 8px 15px;
+        margin: 5px;
+        cursor: pointer;
+        background: #1e1e1e;
+        color: white;
+        border: 1px solid #555;
+        border-radius: 6px;
+        font-size: 35px;
+        /* transition:
+          background 0.2s,
+          transform 0.1s,
+          box-shadow 0.2s; */
+            transition: filter 0.15s, box-shadow 0.15s, transform 0.1s;
+
+      }
+      button:active{
+        filter: brightness(1.8);
+  box-shadow: 0 0 15px #4caf50;
+  transform: scale(0.96);
+  /* transform: scale(0.95); */
+}
+/* #timer:active {
+   filter: brightness(1.8);
+  box-shadow: 0 0 15px #4caf50;
+  transform: scale(0.96);
+} */
+      #message {
+        margin-top: 12px;
+        font-size: 18px;
+        color: yellow;
+      }
+
+      .blink {
+        color: red;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* active jumping effect */
+.active-jump{
+  animation: jump 1s infinite;
+  box-shadow: 0 0 18px #4caf50;
+}
+
+@keyframes jump {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-6px); }
+  60%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="timer">
+      <h1>TIMER</h1>
+      <input id="min" type="number" placeholder="MM" />
+      <input id="sec" type="number" placeholder="SS" />
+
+      <div id="display">00 : 00</div>
+
+      <button id="Start">Start</button>
+      <button id="Pause">Pause</button>
+      <button id="Reset">Reset</button>
+      <div id="message"></div>
+
+      <audio id="alarm" loop>
+        <!-- <source
+          src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+        /> -->
+        <!-- <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"> -->
+
+        <source
+          src="https://actions.google.com/sounds/v1/alarms/medium_bell_ringing_near.ogg"
+        />
+      </audio>
+    </div>
+  </body>
+
+  <script>
+    let timer;
+    let totalSeconds = 0;
+    let isrunning = false; //used to avoid more than one click on start button
+
+    const minInput = document.getElementById("min");
+    const secInput = document.getElementById("sec");
+    const display = document.getElementById("display");
+    const message = document.getElementById("message");
+    const alarm = document.getElementById("alarm");
+    const startBtn = document.getElementById("timer");
+
+
+    document.getElementById("Start").addEventListener("click", startTimer);
+    document.getElementById("Pause").addEventListener("click", pauseTimer);
+    document.getElementById("Reset").addEventListener("click", resetTimer);
+
+    function startTimer() {
+      if (isrunning) return; // block second click
+
+      if (totalSeconds == 0) {
+        const min = parseInt(minInput.value) || 0;
+        const sec = parseInt(secInput.value) || 0;
+        totalSeconds = min * 60 + sec;
+      }
+      if (totalSeconds <= 0) return;
+      isrunning = true;
+
+
+      timer = setInterval(() => {
+        let m = Math.floor(totalSeconds / 60);
+        let s = totalSeconds % 60;
+
+        document.querySelector
+        display.innerHTML =
+          String(m).padStart(2, "0") + " : " + String(s).padStart(2, "0");
+
+        totalSeconds--;
+
+        if (totalSeconds < 0) {
+          clearInterval(timer);
+          isrunning = false;
+
+          message.innerText = "⏰ Time Over! Click Reset!";
+          display.classList.add("blink");
+          alarm.currentTime = 0;
+          alarm.play();
+      startBtn.classList.add("active-jump");
+
+          //  alert("⏰ Time Over!");
+          //   document.getElementById("beep").play();
+          //  resetTimer();
+        }
+      }, 1000);
+      console.log("gg");
+    }
+
+    function pauseTimer() {
+      clearInterval(timer);
+      isrunning = false;
+      startBtn.classList.remove("active-jump");
+
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      totalSeconds = 0;
+      isrunning = false;
+
+      display.innerText = "00 : 00";
+      display.classList.remove("blink");
+      message.innerText = "";
+
+      minInput.value = "";
+      secInput.value = "";
+
+      alarm.pause();
+      alarm.currentTime = 0;
+      startBtn.classList.remove("active-jump");
+
+    }
+
+    function buttonEffect(btn){
+  // color effect
+  btn.classList.add("btn-clicked");
+  setTimeout(() => btn.classList.remove("btn-clicked"), 200);
+
+  // vibration (works on mobile)
+  if (navigator.vibrate) {
+    navigator.vibrate(50); // ms
+  }
+}
+
+  </script>
+</html>

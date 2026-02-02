@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unlimited Color</title>
+    <style>
+     
+     body{
+    background-color: #121212;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mainBox{
+    border: 5px solid black;
+    box-shadow: 0 0 10px white;
+    padding: 10px;
+
+}
+#box2{
+    display: flex;
+    justify-content: center;
+}
+button{
+    margin-left: 4px;
+    margin-bottom: 4px;
+    padding: 8px 15px;
+    font-size: 16px;
+}
+.pn{
+    width: 70px;
+  margin-left: 4px;
+    margin-bottom: 0px;
+    padding: 4px 14px;
+    font-size: 10px;
+}
+#color{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+     border: 1px solid black;
+    box-shadow: 0 0 10px white;
+    margin-top: 12px ;
+    color: white;
+}
+#previous{
+    justify-content: left;
+    margin-right: 4px;
+}
+#color div{
+    height: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+     
+    </style>
+  </head>
+  <body>
+    <div id="mainBox">
+      <div id="box1"><h1>Unlimited Color</h1></div>
+      <div id="box2">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+      </div>
+
+      <div id="color">
+        <div>
+          <button id="previous" class="pn">Previous</button>
+        </div>
+        <div>
+          <p id="color_name"></p>
+        </div>
+        <div>
+          <button id="next" class="pn">next</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script >
+    
+let setColor;
+let isRunning = false;
+let arr = [];
+let i = -1;
+
+const body = document.querySelector('body');
+const Start = document.getElementById('start');
+const Stop = document.getElementById('stop');
+const previous = document.getElementById('previous');
+const next = document.getElementById('next');
+const color_name = document.getElementById('color_name');
+
+function getRandomColor() {
+    const hex = '0123456789ABCDEF';
+    let color = '#';
+    for (let j = 0; j < 6; j++) {
+        color += hex[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+Start.addEventListener('click', change_color);
+Stop.addEventListener('click', stop_color);
+previous.addEventListener('click', previous_color);
+next.addEventListener('click', next_color);
+
+function change_color() {
+    if (isRunning) return;
+
+    isRunning = true;
+    setColor = setInterval(() => {
+        const color = getRandomColor();
+        arr.push(color);
+        i = arr.length - 1;
+
+        body.style.backgroundColor = color;
+        color_name.innerText = color;
+    }, 1000);
+}
+
+function stop_color() {
+    isRunning = false;
+    clearInterval(setColor);
+}
+
+function previous_color() {
+    stop_color();
+    if (i > 0) {
+        i--;
+        body.style.backgroundColor = arr[i];
+        color_name.innerText = arr[i];
+    }
+}
+
+function next_color() {
+    stop_color();
+    if (i < arr.length - 1) {
+        i++;
+        body.style.backgroundColor = arr[i];
+        color_name.innerText = arr[i];
+    }
+}
+
+
+
+
+  </script>
+</html>

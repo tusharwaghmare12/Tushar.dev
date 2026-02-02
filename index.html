@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tushar | Web Developer</title>
+
+ <!-- css  -->
+
+<style>
+
+
+:root{
+    --bg: black;
+  --card: #121212;
+  --text:white;
+  /* --muted:#6380a9; */
+  --muted:#76b499;
+  --accent:#2563eb;
+}
+
+.light{
+ --bg:#0b1120;
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#38bdf8;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* nav */
+
+header{
+  position:sticky;
+  top:0;
+  /* background-color: black; */
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
+  z-index:10;
+}
+
+nav{
+  max-width:1100px;
+  margin:auto;
+  padding:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+nav ul{
+  display:flex;
+  list-style:none;
+  gap:1.5rem;
+}
+
+nav a{
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:500;
+}
+
+nav a.active, nav a:hover{
+  color:var(--accent);
+}
+
+.toggle{
+  border:none;
+  padding:.4rem .8rem;
+  border-radius:20px;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:5rem 1rem;
+}
+
+.hero{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+}
+
+.hero-box{
+  display:grid;
+  gap:1.5rem;
+}
+
+.hero h1{
+  font-size:3rem;
+  font-weight:800;
+}
+
+.hero span{
+  color:var(--accent);
+}
+
+.hero p{
+  max-width:600px;
+  color:var(--muted);
+  font-size:1.1rem;
+}
+
+.hero button{
+  width:max-content;
+  padding:.7rem 1.5rem;
+  font-size:1rem;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;
+}
+
+.card{
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.card:hover{
+  transform: translateY(-12px);
+  box-shadow: 0 15px 35px rgba(56,189,248,0.35);
+}
+
+
+.skill{
+  margin-bottom:1rem;
+}
+
+.bar{
+  height:10px;
+  background:#1e293b;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  width:0;
+  background:var(--accent);
+  transition:1.5s ease;
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;
+}
+
+.projects h3{
+  margin-bottom:.5rem;
+}
+
+.projects p{
+  color:var(--muted);
+  margin-bottom:.7rem;
+}
+
+.projects a{
+  text-decoration:none;
+  color:var(--accent);
+  font-weight:600;
+}
+
+form{
+  max-width:500px;
+  margin:auto;
+  display:grid;
+  gap:1rem;
+}
+
+input,textarea{
+  padding:.8rem;
+  border-radius:8px;
+  border:none;
+  outline:none;
+}
+
+form button{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:.8rem;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+footer{
+  text-align:center;
+  padding:2rem;
+  color:var(--muted);
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem;}
+}
+.profile-pic {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;        
+  object-position: top;     
+  border-radius: 50%;       
+  box-shadow: 0 0px 35px rgba(56,189,248,0.35);
+  border: 1px solid black;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<h3>Tushar.dev</h3>
+<ul>
+<li><a href="#home" class="nav">Home</a></li>
+<li><a href="#about" class="nav">About</a></li>
+<li><a href="#projects" class="nav">Projects</a></li>
+<li><a href="#contact" class="nav">Contact</a></li>
+</ul>
+<button class="toggle" onclick="theme()">🌙</button>
+</nav>
+</header>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="hero">
+  
+<div class="hero-box reveal">
+<h1>Hi, I'm <span>Tushar</span></h1>
+<p>A student web developer focused on building clean, responsive and interactive websites using modern web technologies.</p>
+<button onclick="location.href='#projects'" >View Projects</button>
+</div>
+  <div>
+        <img src="img.jpeg" alt="photo" class="profile-pic">
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+<h2>About Me</h2><br>
+<div class="grid">
+<div class="card reveal">
+<p>
+I am a passionate student learning full-stack web development.  
+I enjoy problem solving and building user-friendly web interfaces.
+</p>
+<p><strong>Education:</strong>  B.Tec - computer Science Engineering Student</p>
+</div>
+
+<div class="card reveal">
+<h3>Skills</h3>
+<div class="skill">HTML<div class="bar"><div class="fill" data="90"></div></div></div>
+<div class="skill">CSS<div class="bar"><div class="fill" data="85"></div></div></div>
+<div class="skill">JavaScript<div class="bar"><div class="fill" data="75"></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+<h2>Projects</h2><br>
+<div class="projects">
+<div class="card reveal">
+<h3>Your Local Time</h3>
+<p>Live digital clock with real-time updates.</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="digital_clock.html" target="_blank">Go→</a>
+</div>
+
+<div class="card reveal">
+<h3>Unlimited Colors</h3>
+<p>Multimple background-color changing per sec.</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="Unlimited_color.html" target="_blank">Go→</a>
+</div>
+
+<div class="card reveal">
+<h3>Guess The Number</h3>
+<p>Guess the machine's number under attempts</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="Guess_the_number.html" target="_blank">Go→</a>
+</div>
+
+<div class="card reveal">
+<h3>Timer</h3>
+<p>Stopwatch & countdown with controls.</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="mytimer.html" target="_blank" rel="noopener noreferrer">Live Demo →</a>
+</div>
+
+<div class="card reveal">
+<h3>BMI Calculator</h3>
+<p>Calculatiing BMI by taking height and body weight</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="BMI_calculator.html" target="_blank" rel="noopener noreferrer">Live Demo →</a>
+</div>
+
+<div class="card reveal">
+<h3>Journey Planner</h3>
+<p>Clean UI calculator with keyboard support.</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="https://tusharwaghmare12.github.io/journey-planner/" target="_blank" rel="noopener noreferrer">GitHub →</a>
+</div>
+
+<div class="card reveal">
+<h3>Calculator</h3>
+<p>Clean UI calculator with keyboard support.</p>
+<p><b>Tech:</b> HTML, CSS, JS</p>
+<a href="https://tusharwaghmare12.github.io/basic-calculator-p1/"  target="_blank" rel="noopener noreferrer">GitHub →</a>
+</div>
+
+</div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+<h2>Contact</h2><br>
+<form onsubmit="return validate()">
+<input id="name" placeholder="Name">
+<input id="email" placeholder="Email">
+<input id="sub" placeholder="Subject">
+<textarea id="msg" rows="4" placeholder="Message"></textarea>
+<button>Send Message</button>
+</form>
+</section>
+
+<footer>
+© 2026 Tushar • Built with HTML, CSS & JS
+</footer>
+
+<!-- ================= JS ================= -->
+<script>
+/* active nav */
+const navs=document.querySelectorAll('.nav');
+window.addEventListener('scroll',()=>{
+  let y=scrollY;
+  document.querySelectorAll('section').forEach(s=>{
+    if(y>=s.offsetTop-120){
+      navs.forEach(n=>n.classList.remove('active'));
+      document.querySelector(`a[href="#${s.id}"]`).classList.add('active');
+    }
+  });
+});
+
+/* reveal */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting){
+      x.target.classList.add('show');
+    }
+  });
+});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* skills */
+window.onload=()=>{
+  document.querySelectorAll('.fill').forEach(f=>{
+    f.style.width=f.getAttribute('data')+'%';
+  });
+};
+
+/* form */
+function validate(){
+  if(!name.value||!email.value||!sub.value||!msg.value){
+    alert("Fill all fields");
+    return false;
+  }
+  if(!/^\S+@\S+\.\S+$/.test(email.value)){
+    alert("Invalid email");
+    return false;
+  }
+  alert("Message sent 🚀");
+  return false;
+}
+
+/* theme */
+function theme(){
+  document.body.classList.toggle('light');
+}
+</script>
+
+</body>
+</html>
