@@ -11,20 +11,42 @@
 
 
 :root{
-    --bg: black;
+    --bg: rgb(236, 233, 233);
+  --card: #1d1c1c;
+  --text:white;
+  /* --muted:#6380a9; */
+  --muted:#76b499;
+  --accent:#2563eb;
+
+
+.change_text_color{
+    color: black;
+   
+}
+
+.card:hover{
+  transform: translateY(-12px);
+  /* box-shadow: 0 15px 35px rgba(0, 179, 255, 0.35); */
+  box-shadow: 0 15px 35px rgba(81, 0, 255, 0.35);
+  text-shadow: 0 10px 10px rgba(0, 179, 255, 0.35);;
+}
+
+
+}
+
+.light{
+  --bg: black;
   --card: #121212;
   --text:white;
   /* --muted:#6380a9; */
   --muted:#76b499;
   --accent:#2563eb;
+
+  .change_text_color{
+    color: #e5e7eb;
+    
 }
 
-.light{
- --bg:#0b1120;
-  --card:#111827;
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --accent:#38bdf8;
 }
 
 *{
@@ -238,7 +260,16 @@ footer{
   border-radius: 50%;       
   box-shadow: 0 0px 35px rgba(56,189,248,0.35);
   border: 1px solid black;
+
+   transition: all 0.4s ease;
+
+ 
 }
+.profile-pic:hover{
+   transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(81, 0, 255, 0.35);
+}
+
 
 </style>
 </head>
@@ -262,7 +293,7 @@ footer{
 <section id="home" class="hero">
   
 <div class="hero-box reveal">
-<h1>Hi, I'm <span>Tushar</span></h1>
+<h1 class="change_text_color">Hi, I'm <span>Tushar</span></h1>
 <p>A student web developer focused on building clean, responsive and interactive websites using modern web technologies.</p>
 <button onclick="location.href='#projects'" >View Projects</button>
 </div>
@@ -272,8 +303,8 @@ footer{
 </section>
 
 <!-- ===== ABOUT ===== -->
-<section id="about">
-<h2>About Me</h2><br>
+<section id="about" >
+<h2 class="change_text_color">About Me</h2><br>
 <div class="grid">
 <div class="card reveal">
 <p>
@@ -294,7 +325,7 @@ I enjoy problem solving and building user-friendly web interfaces.
 
 <!-- ===== PROJECTS ===== -->
 <section id="projects">
-<h2>Projects</h2><br>
+<h2 class="change_text_color">Projects</h2><br>
 <div class="projects">
 <div class="card reveal">
 <h3>Your Local Time</h3>
@@ -350,7 +381,7 @@ I enjoy problem solving and building user-friendly web interfaces.
 
 <!-- ===== CONTACT ===== -->
 <section id="contact">
-<h2>Contact</h2><br>
+<h2 class="change_text_color">Contact</h2><br>
 <form onsubmit="return validate()">
 <input id="name" placeholder="Name">
 <input id="email" placeholder="Email">
@@ -364,9 +395,9 @@ I enjoy problem solving and building user-friendly web interfaces.
 © 2026 Tushar • Built with HTML, CSS & JS
 </footer>
 
-<!-- ================= JS ================= -->
+
 <script>
-/* active nav */
+
 const navs=document.querySelectorAll('.nav');
 window.addEventListener('scroll',()=>{
   let y=scrollY;
@@ -378,7 +409,7 @@ window.addEventListener('scroll',()=>{
   });
 });
 
-/* reveal */
+
 const obs=new IntersectionObserver(e=>{
   e.forEach(x=>{
     if(x.isIntersecting){
@@ -388,14 +419,14 @@ const obs=new IntersectionObserver(e=>{
 });
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* skills */
+
 window.onload=()=>{
   document.querySelectorAll('.fill').forEach(f=>{
     f.style.width=f.getAttribute('data')+'%';
   });
 };
 
-/* form */
+
 function validate(){
   if(!name.value||!email.value||!sub.value||!msg.value){
     alert("Fill all fields");
@@ -409,7 +440,7 @@ function validate(){
   return false;
 }
 
-/* theme */
+
 function theme(){
   document.body.classList.toggle('light');
 }
